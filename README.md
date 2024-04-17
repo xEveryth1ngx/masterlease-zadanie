@@ -13,9 +13,14 @@ To run the project you need to have docker installed,
     laravelsail/php83-composer:latest \
     composer install --ignore-platform-reqs
 ```
+- Create a .env file in the root directory of the project and paste the content of the .env.example file into it, fill the variables according to laravel documentation
 - Run the command
 ```
     ./vendor/bin/sail up
+```
+- Run the command to perform the migrations
+```
+    ./vendor/bin/sail artisan migrate
 ```
 - You are all set :) Server is running on localhost:80
 
