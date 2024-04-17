@@ -14,7 +14,7 @@ class MultiplyController extends Controller
     public function __invoke(MultiplyRequest $request): JsonResponse
     {
         $validated = $request->safe()->only(['size']);
-        $size = $validated['size'];
+        $size = (int)$validated['size'];
 
         if (Cache::has("multiply_table_$size")) {
             return response()->json(Cache::get("multiply_table_$size"));
