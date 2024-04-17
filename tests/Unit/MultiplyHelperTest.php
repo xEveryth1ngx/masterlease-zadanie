@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use App\Utils\Multiply\MultiplyHelper;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -64,14 +65,9 @@ class MultiplyHelperTest extends TestCase
     #[DataProvider('generate_multiplication_table_data_provider_failed')]
     public function test_generate_multiplication_table_failed(int $size, string $expected): void
     {
-        try {
-            $result = MultiplyHelper::generateMultiplicationTable($size);
-        } catch (Exception $exception) {
-            $this->assertInstanceOf($expected, $exception);
-            return;
-        }
+        self::expectException($expected);
 
-        $this->assertSame($expected, $result);
+        MultiplyHelper::generateMultiplicationTable($size);
     }
 
     public static function generate_multiplication_table_data_provider_failed(): array
