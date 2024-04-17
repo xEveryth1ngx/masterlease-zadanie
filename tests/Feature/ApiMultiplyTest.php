@@ -40,6 +40,10 @@ class ApiMultiplyTest extends TestCase
                 'size' => 10,
                 'status' => Response::HTTP_OK
             ],
+            'test case - size 101' => [
+                'size' => 101,
+                'status' => Response::HTTP_UNPROCESSABLE_ENTITY
+            ],
             'test case - size -1' => [
                 'size' => -1,
                 'status' => Response::HTTP_UNPROCESSABLE_ENTITY
