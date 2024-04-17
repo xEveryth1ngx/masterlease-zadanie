@@ -15,6 +15,12 @@ class ApiAuthController extends Controller
     {
         $validated = $request->safe()->only(['name', 'email', 'password']);
 
+        if (User::where('email', $validated['email'])->exists()) {
+            return response()->json([
+                'message' => 'Email already exists!',
+            ], Response::HTTP_CONFLICT);
+        }
+
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
@@ -29,7 +35,7 @@ class ApiAuthController extends Controller
 
         return response()->json([
             'message' => 'User registered successfully!',
-        ]);
+        ], Response::HTTP_CREATED);
     }
 
     public function login(LoginRequest $request): JsonResponse
